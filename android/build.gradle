@@ -2,30 +2,17 @@ group 'com.example.flutter_sms'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '2.0.20'
+    ext.kotlin_version = '1.7.22'
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.android.tools.build:gradle:8.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
-    subprojects {
-        afterEvaluate {project ->
-            if (project.hasProperty("android")) {
-                android {
-                    compileSdkVersion 34
-                    buildToolsVersion '29'
-                    if (namespace == null) {
-                        namespace project.group
-                    }
-                }
-            }
-        }
-    }
 }
 
 rootProject.allprojects {
@@ -61,10 +48,12 @@ android {
 
     // Ensure Kotlin targets JVM 17
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = 17
+    }
+
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     }
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
+
